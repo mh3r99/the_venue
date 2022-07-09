@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Fade, Slide } from "react-reveal";
+import MyButton from "../utils/MyButton";
 
 const Discount = () => {
   const [discount, setDiscount] = useState({
@@ -32,7 +33,7 @@ const Discount = () => {
           </div>
         </Fade>
 
-        <Slide>
+        <Slide right>
           <div className="discount_description">
             <h3>Purchase tickets before 20th JUNE</h3>
             <p>
@@ -42,7 +43,12 @@ const Discount = () => {
               dicta sunt explicabo.
             </p>
 
-            <div>button</div>
+            <MyButton
+              text="Purchase tickets"
+              bck="#ffa800"
+              color="#fff"
+              link="http://google.com"
+            />
           </div>
         </Slide>
       </div>
