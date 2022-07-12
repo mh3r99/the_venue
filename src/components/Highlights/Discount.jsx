@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Fade, Slide } from "react-reveal";
+import { Fade } from "react-awesome-reveal";
+import { Slide } from "react-reveal";
 import MyButton from "../utils/MyButton";
 
 const Discount = () => {
-  const [discount, setDiscount] = useState({
-    start: 0,
-    end: 30,
-  });
+  const end = 30;
+  const [start, setStart] = useState(0);
 
   const porcentage = () => {
-    if (discount.start < discount.end) {
-      setDiscount((prev) => ({
-        ...prev,
-        start: prev.start + 1,
-      }));
+    if (start < end) {
+      setStart((prevCount) => prevCount + 1);
     }
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      porcentage();
-    }, 30);
-  });
+    if (start > 0 && start < 30) {
+      setTimeout(() => {
+        setStart((prevCount) => prevCount + 1);
+      }, 30);
+    }
+  }, [start]);
 
   return (
     <div className="center_wrapper">
       <div className="discount_wrapper">
-        <Fade onReveal={() => porcentage()}>
+        <Fade
+          onVisibilityChange={(inView) => {
+            if (inView) {
+              porcentage();
+            }
+          }}
+          // onReveal={() => porcentage()}
+        >
           <div className="discount_porcentage">
-            <span>{discount.start}%</span>
+            <span>{start}%</span>
             <span>OFF</span>
           </div>
         </Fade>
