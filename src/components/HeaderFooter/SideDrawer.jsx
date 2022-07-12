@@ -3,6 +3,24 @@ import { Drawer, List, ListItem } from "@material-ui/core";
 import { scroller } from "react-scroll";
 
 const SideDrawer = ({ open, onClose }) => {
+  const links = [
+    { where: "featured", value: "Event starts in" },
+    { where: "venuenfo", value: "Venue NFO" },
+    { where: "highlights", value: "Highlights" },
+    { where: "pricing", value: "Pricing" },
+    { where: "location", value: "Location" },
+  ];
+
+  const renderItem = (item) => (
+    <ListItem
+      key={item.where}
+      button
+      onClick={() => scrollToElement(item.where)}
+    >
+      {item.value}
+    </ListItem>
+  );
+
   const scrollToElement = (element) => {
     scroller.scrollTo(element, {
       duration: 1500,
@@ -21,23 +39,7 @@ const SideDrawer = ({ open, onClose }) => {
         onClose(false);
       }}
     >
-      <List component="nav">
-        <ListItem button onClick={() => scrollToElement("featured")}>
-          Event starts in
-        </ListItem>
-        <ListItem button onClick={() => scrollToElement("venuenfo")}>
-          Venue info
-        </ListItem>
-        <ListItem button onClick={() => scrollToElement("highlights")}>
-          Highlights
-        </ListItem>
-        <ListItem button onClick={() => scrollToElement("pricing")}>
-          Pricing
-        </ListItem>
-        <ListItem button onClick={() => scrollToElement("location")}>
-          Location
-        </ListItem>
-      </List>
+      <List component="nav">{links.map(renderItem)}</List>
     </Drawer>
   );
 };
